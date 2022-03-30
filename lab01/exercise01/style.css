@@ -12,11 +12,11 @@ img {
     max-width: 100%;
 }
 
-/*
-Add some style blocks below this line to style the card.
-*/
-
 h2, p, button {
     margin-left: 6%;
     margin-right: 6%;
+}
+
+button {
+    margin-bottom: 5%;
 }

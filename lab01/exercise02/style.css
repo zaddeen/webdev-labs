@@ -10,15 +10,49 @@ body {
 Add some style blocks below this line to style the cards.
 Feel free to borrow from Exercise 1.
 */
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+section {
+    border: 1px solid black;
+    width: 300px;
+    margin: 0% 0.5%;
+}
+
+main img {
+    max-width: 100%;
+}
+
+/*
+Add some style blocks below this line to style the card.
+*/
+
+main h2, p, button {
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+main button {
+    margin-bottom: 5%;
+}
 
 
 /* Tablet Media Query */
 @media only screen and (max-width: 1000px) {
+    main {
+    flex-wrap: wrap;
+}
 
+    section {
+        flex-basis: 45%;
+    }
 }
 
 /* Mobile Phone Media Query */
 @media only screen and (max-width: 600px) {
-
-    
+    section {
+        flex-basis: 100%;
+    }
 }
