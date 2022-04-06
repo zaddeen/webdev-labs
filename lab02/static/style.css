@@ -1,0 +1,75 @@
+body * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Grape Nuts', cursive;
+    margin: 0;
+}
+
+/* Font Resizing */
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+a {
+    font-size: 24px;
+}
+
+p {
+    font-size: 20px;
+}
+/* Actual CSS */
+
+header {
+    padding: 3vh;
+    background: #EEE;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    width: 250px;
+    list-style-type: none;
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 3vh;
+}
+
+.card {
+    margin: 1%;
+    padding: 0% 1%;
+    border: 2px solid lavender;
+    border-radius: 25px;
+    width: 30%;
+    background-color: lavender;
+}
+
+#stars {
+    margin-bottom: 1%;
+}
+
+main img {
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    /* Media queries go here */
+}
+
+@media only screen and (max-width: 600px) {
+    /* Media queries go here */
+}

@@ -1,0 +1,14 @@
+<div class="card">
+    <h2>{{ restaurant.get('name') }}</h2>
+    <div id="stars">
+        {% for item in range((restaurant.rating)|int) %}
+        <i class="fa-solid fa-star"></i>
+        {% endfor %}
+    </div>
+    <img src={{restaurant.image_url}}>
+    <p>{{restaurant.display_address}}</p>
+    {% for item in range((restaurant.price)|length) %}
+    <i class="fa-solid fa-dollar-sign"></i>
+    {% endfor %}
+    <p>{{restaurant.review_count}} Reviews </p>
+</div>
