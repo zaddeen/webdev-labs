@@ -1,0 +1,5 @@
+1. The value of SQLAlchemy is that it allows us to use Python to issue queries instead of normal SQL. SQL is a very powerful language, but by using Python we can combine SQL functionality with other helpful tools and facilitate simpler communication with the database.
+
+2. A model is a Python class that defines how we want to interact with the database. Information given to the model includes the table we want to modify, any field that we want to either modify or add, and a format that we will include our data in.
+
+3. A view defines each of the operations for interacting with a certain table in our database. It will contain at least a List resource (return list, create) and a Detail resource (read, update, delete) to interact with the given table.
