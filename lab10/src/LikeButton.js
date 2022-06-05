@@ -56,7 +56,6 @@ class LikeButton extends React.Component {
 
     render () {
         const likeId = this.props.likeId;
-        console.log("Post " + this.props.postId + ": " + likeId)
         return (
             <button role="switch"
                 className={likeId ? "post-action liked" : "post-action"} 

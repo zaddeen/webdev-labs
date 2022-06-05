@@ -2,6 +2,7 @@ import React from 'react';
 import LikeButton from './LikeButton';
 import BookmarkButton from './BookmarkButton';
 import {getHeaders} from './utils';
+import AddComment from './AddComment';
 
 class Post extends React.Component {  
 
@@ -37,6 +38,7 @@ class Post extends React.Component {
     
     render () {
         const post = this.state.post;
+        const index = this.state.index;
         if (!post) {
             return (
                 <div></div>  
@@ -56,8 +58,8 @@ class Post extends React.Component {
                                 postId={post.id}
                                 likeId={post.current_user_like_id}
                                 requeryPost={this.requeryPost}/>
-                            <button className="post-action"> <i className="fa fa-comment-o fa-xl"></i> </button>
-                            <button className="post-action"> <i className="fa fa-paper-plane-o fa-xl"></i> </button>
+                            <i className="fa fa-comment-o fa-xl"></i>
+                            <i className="fa fa-paper-plane-o fa-xl"></i>
                             
                         </div>
                         <BookmarkButton 
@@ -65,6 +67,22 @@ class Post extends React.Component {
                             bookmarkId={post.current_user_bookmark_id}
                             requeryPost={this.requeryPost}/>
                     </div>
+                    <div className="likes-and-caption">
+                        <p id="like-number"> <strong> {post.likes.length} likes </strong> </p>
+                        <p className="caption"> <strong> {post.user.username} </strong> {post.caption}... <a className="more-button" href="/"> more </a></p>
+                        {post.comments.length >= 2 ? <button className="view-button"> View all {post.comments.length} comments </button> : null}
+                        {post.comments.length >= 1 ? 
+                            <p className="comment"> <strong> {post.comments[post.comments.length - 1].user.username} </strong> {post.comments[post.comments.length - 1].text} </p>
+                            :
+                            null                       
+                        }
+                        <p> {post.display_time.toUpperCase()} </p>
+                    </div>
+                    <hr />
+                    <AddComment 
+                        postId={post.id}
+                        postIndex={index}
+                        requeryPost={this.requeryPost}/>
                 </div>
             )
 

@@ -55,7 +55,6 @@ class BookmarkButton extends React.Component {
 
     render () {
         const bookmarkId = this.props.bookmarkId;
-        console.log("Post " + this.props.postId + ": " + bookmarkId)
         return (
             <button role="switch"
                 className={bookmarkId ? "post-action bookmarked" : "post-action"} 
