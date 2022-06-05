@@ -1,45 +1,68 @@
 import React from 'react';
+import {getHeaders} from './utils'
 
 class BookmarkButton extends React.Component {  
 
     constructor(props) {
         super(props);
-        this.togglebookmark = this.toggleBookmark.bind(this);
+        this.toggleBookmark = this.toggleBookmark.bind(this);
         this.bookmark = this.bookmark.bind(this);
         this.unbookmark = this.unbookmark.bind(this);
     }
 
     toggleBookmark(ev) {
-        if (this.props.Id) {
-            console.log('unbookmark');
-            this.unbookmark();
-        } else {
-            console.log('bookmark');
-            this.bookmark();
+        if (!this.props.bookmarkId) {
+            this.bookmark()
+        }
+        else {
+            this.unbookmark()
         }
     }
 
     bookmark() {
-        console.log('code to bookmark the post');
-        // issue fetch request and then afterwards requery for the post:
-        // this.props.requeryPost();
+        console.log("Bookmarking post.")
+        const postData = {
+            "post_id": this.props.postId
+        };
+        fetch("http://127.0.0.1:5000/api/bookmarks/", {
+                method: "POST",
+                headers: getHeaders(),
+                body: JSON.stringify(postData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                this.props.requeryPost({
+                    bookmarkId: data.id
+                });
+            });
     }
 
     unbookmark() {
-        console.log('code to unbookmark the post');
-        // issue fetch request and then afterwards requery for the post:
-        // this.props.requeryPost();
+        console.log("Deleting bookmark from post.")
+        fetch("http://127.0.0.1:5000/api/bookmarks/" + this.props.bookmarkId, {
+            method: "DELETE",
+            headers: getHeaders()
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+                this.props.requeryPost({
+                    bookmarkId: undefined
+                });
+        });
     }
 
     render () {
         const bookmarkId = this.props.bookmarkId;
+        console.log("Post " + this.props.postId + ": " + bookmarkId)
         return (
             <button role="switch"
-                className="bookmark" 
-                aria-label="bookmark Button" 
+                className={bookmarkId ? "post-action bookmarked" : "post-action"} 
+                aria-label="Bookmark Button" 
                 aria-checked={bookmarkId ? true : false}
-                onClick={this.togglebookmark}>
-                <i className={bookmarkId ? 'fas fa-bookmark' : 'far fa-bookmark'}></i>                        
+                onClick={this.toggleBookmark}>
+                <i className={bookmarkId ? "fa fa-bookmark fa-xl" : "fa fa-bookmark-o fa-xl"}></i>                        
             </button>
         ) 
     }

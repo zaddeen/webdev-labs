@@ -1,4 +1,5 @@
 import React from 'react';
+import {getHeaders} from './utils'
 
 class LikeButton extends React.Component {  
 
@@ -10,36 +11,59 @@ class LikeButton extends React.Component {
     }
 
     toggleLike(ev) {
-        if (this.props.likeId) {
-            console.log('unlike');
-            this.unlike();
-        } else {
-            console.log('like');
-            this.like();
+        console.log(this.props)
+        if (!this.props.likeId) {
+            this.like()
+        }
+        else {
+            this.unlike()
         }
     }
 
     like() {
-        console.log('code to like the post');
-        // issue fetch request and then afterwards requery for the post:
-        // this.props.requeryPost();
+        console.log("Liking post.")
+        const postData = {
+            "post_id": this.props.postId
+        };
+        fetch("http://127.0.0.1:5000/api/posts/likes/", {
+                method: "POST",
+                headers: getHeaders(),
+                body: JSON.stringify(postData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                this.props.requeryPost({
+                    likeId: data.id
+                });
+            });
     }
 
     unlike() {
-        console.log('code to unlike the post');
-        // issue fetch request and then afterwards requery for the post:
-        // this.props.requeryPost();
+        console.log("Deleting like from post.")
+        fetch("http://127.0.0.1:5000/api/posts/likes/" + this.props.likeId, {
+            method: "DELETE",
+            headers: getHeaders()
+        })
+        .then(response => response.json())
+        .then(data => {
+                console.log(data);
+                this.props.requeryPost({
+                    likeId: undefined
+            });
+        });
     }
 
     render () {
         const likeId = this.props.likeId;
+        console.log("Post " + this.props.postId + ": " + likeId)
         return (
             <button role="switch"
-                className="like" 
+                className={likeId ? "post-action liked" : "post-action"} 
                 aria-label="Like Button" 
                 aria-checked={likeId ? true : false}
                 onClick={this.toggleLike}>
-                <i className={likeId ? 'fas fa-heart' : 'far fa-heart'}></i>                        
+                <i className={likeId ? "fa fa-heart fa-xl" : "fa fa-heart-o fa-xl"}></i>                        
             </button>
         ) 
     }
